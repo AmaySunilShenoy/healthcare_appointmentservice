@@ -20,12 +20,13 @@ from django.urls import path
 from django.urls import re_path, include
 from rest_framework.routers import DefaultRouter
 
-from apps.appointmentservice.views import AppointmentViewSet
+from apps.appointmentservice.views import AppointmentUserViewSet
 
 router = DefaultRouter()
-router.register(r'appointments', AppointmentViewSet, basename='appointments')
+router.register(r'view', AppointmentUserViewSet, basename='view')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path(r'^', include(router.urls)),
+    path('api/appointments/', include('apps.appointmentservice.urls')),
+    path('api/appointments/', include(router.urls))
 ]
