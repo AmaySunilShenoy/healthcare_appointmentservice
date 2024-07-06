@@ -1,7 +1,16 @@
 FROM python:3.12
-ENV PYTHONUNBUFFERED 1
+
+# Set the working directory in the container
 WORKDIR /app
-COPY requirements.txt /app/requirements.txt
+
+# Copy the dependencies file to the working directory
+COPY requirements.txt .
+
+# Install any dependencies
 RUN pip install -r requirements.txt
-COPY . /app
-CMD [ "python", "./manage.py" , "runserver"]
+
+# Copy the content of the local src directory to the working directory
+COPY . .
+
+# Specify the command to run on container start
+CMD ["python", "./manage.py", "runserver"]

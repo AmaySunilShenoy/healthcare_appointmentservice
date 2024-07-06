@@ -5,9 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8000:8000
-    volumes:
-      - .:/app
+      - ${SERVICE_PORT}:${SERVICE_PORT}
     depends_on:
       - db
 
@@ -15,8 +13,8 @@ services:
     image: mysql:latest
     restart: always
     environment:
-      MYSQL_DATABASE: healthcare
-      MYSQL_ROOT_PASSWORD : root
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_ROOT_PASSWORD : ${DATABASE_PASSWORD}
     volumes:
       - .dbdata:/var/lib/mysql
     ports:
